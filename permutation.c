@@ -40,3 +40,44 @@ for (candidate = N; candidate > last; candidate--) {
 
     return 0;
 }
+
+#include <stdio.h>
+
+#define N 3
+
+int main() {
+    int nopts[N + 2];
+    int option[N + 2][N + 2];
+    int move, start, i, candidate, last;
+
+    move = start = 0;
+    nopts[start] = 1;   // dummy stack
+
+    while (nopts[start] > 0) {
+        if (nopts[move] > 0) {
+            move++;
+            nopts[move] = 0;
+
+            if (move > 1) {
+                for (i = 1; i < move; i++) {
+                    printf("%d", option[i][nopts[i]]);
+                }
+                printf("\n");
+            }
+
+            if (move == 1)
+                last = 0;
+            else
+                last = option[move - 1][nopts[move - 1]];
+
+            for (candidate = N; candidate >= last + 1; candidate--) {
+                option[move][++nopts[move]] = candidate;
+            }
+        } else {
+            move--;
+            nopts[move]--;
+        }
+    }
+
+    return 0;
+}
