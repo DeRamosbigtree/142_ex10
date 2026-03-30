@@ -24,15 +24,12 @@ int main() {
                 // consider N down to 1 as valid candidates
                 for (candidate = N; candidate >= 1; candidate--) {
                     // check for duplicates
-                    for (i = move - 1; i >= 1; i--) {
-                        if (option[i][nopts[i]] == candidate)
-                            break;
-                    }
-
-                    // no duplicates found
-                    if (i < 1) {
-                        option[move][++nopts[move]] = candidate;   // push candidate
-                    }
+                    last = option[move - 1][nopts[move - 1]];
+					for (candidate = N; candidate > last; candidate--) {
+                    last = option[move - 1][nopts[move - 1]];
+for (candidate = N; candidate > last; candidate--) {
+    option[move][++nopts[move]] = candidate;
+}    
                 }
             }
         } else {
